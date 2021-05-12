@@ -7,8 +7,8 @@ abstract class TimerState extends Equatable {
   List<Object> get props => [duration];
 }
 
-class TimerInitial extends TimerState {
-  const TimerInitial(int duration) : super(duration);
+class Started extends TimerState {
+  const Started(int duration) : super(duration);
 }
 
 class Running extends TimerState {

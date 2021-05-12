@@ -14,32 +14,32 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       : _ticker = ticker,
         super(null);
 
-  TimerState get initialState => TimerInitial(_duration);
+  TimerState get initialState => Started(_duration);
 
   @override
   Stream<TimerState> mapEventToState(event) async* {
-    if (event is TimerStared) {
-      TimerStared start = event;
+    if (event is Start) {
+      Start start = event;
       _tickerSubscription?.cancel();
       _tickerSubscription =
           _ticker.tick(ticks: start.duration).listen((duration) {
-        add(TimerTricked(duration: duration));
+        add(Trick(duration: duration));
       });
-    } else if (event is TimerStopped) {
+    } else if (event is Stop) {
       if (state is Running) {
         _tickerSubscription.pause();
         yield Paused(state.duration);
       }
-    } else if (event is TimerResumed) {
+    } else if (event is Resume) {
       if (state is Paused) {
         _tickerSubscription?.resume();
         yield Running(state.duration);
       }
-    } else if (event is TimerReset) {
+    } else if (event is Reset) {
       _tickerSubscription?.cancel();
-      yield TimerInitial(_duration);
-    } else if (event is TimerTricked) {
-      TimerTricked ticker = event;
+      yield Started(_duration);
+    } else if (event is Trick) {
+      Trick ticker = event;
       yield ticker.duration > 0 ? Running(ticker.duration) : Finished(0);
     }
   }

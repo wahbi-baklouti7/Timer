@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_timer/bloc/bloc.dart';
-import 'package:flutter_timer/home_screen.dart';
+import 'package:flutter_timer/modules/home_screen.dart';
 import 'package:flutter_timer/ticker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
