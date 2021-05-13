@@ -12,9 +12,8 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   StreamSubscription<int> _tickerSubscription;
   TimerBloc({@required Ticker ticker})
       : _ticker = ticker,
-        super(null);
+        super(Started(120));
 
-  TimerState get initialState => Started(_duration);
 
   @override
   Stream<TimerState> mapEventToState(event) async* {
